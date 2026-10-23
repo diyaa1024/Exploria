@@ -1,0 +1,146 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@layer base {
+  :root {
+    --font-serif: 'Fraunces', Georgia, serif;
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-cinzel: 'Cinzel', serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Atlas Color Palette (Directly Extracted from Mid-Century Polar Atlas Map) */
+    --atlas-parchment: #FAF7EE;
+    --atlas-cream: #F4EEDB;
+    --atlas-vellum: #EDE4CE;
+    
+    /* Sea-Foam Sage Teal (Atlas Oceans) */
+    --atlas-ocean: #567D77;
+    --atlas-ocean-dark: #37534F;
+    --atlas-ocean-light: #E7EFEF;
+
+    /* Terracotta Salmon (Atlas Continental Plates) */
+    --atlas-terracotta: #DF795B;
+    --atlas-terracotta-dark: #B94C2E;
+    --atlas-terracotta-light: #FBEFEA;
+
+    /* Sunbaked Ochre Gold */
+    --atlas-ochre: #DE9B35;
+    --atlas-ochre-dark: #B8781B;
+    --atlas-ochre-light: #FCF6EA;
+
+    /* Olive & Moss Green */
+    --atlas-moss: #8E985A;
+    --atlas-moss-dark: #636D33;
+
+    /* Great Circle Navigation Red */
+    --atlas-nav-red: #B93F2C;
+
+    /* Sepia Ink & Typography */
+    --atlas-ink: #221E19;
+    --atlas-ink-muted: #645C4F;
+    --atlas-border: rgba(60, 48, 35, 0.16);
+
+    /* Engine Dark Mode (Archival Deep Slate - Not Gamer Purple) */
+    --engine-bg-deep: #121919;
+    --engine-bg-surface: #182322;
+    --engine-bg-card: rgba(28, 40, 39, 0.90);
+    --engine-border: rgba(237, 228, 206, 0.14);
+    --engine-text: #FAF6ED;
+    --engine-text-muted: #B8C4C2;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .font-serif-title {
+    font-family: var(--font-serif);
+  }
+
+  .font-cinzel {
+    font-family: var(--font-cinzel);
+  }
+
+  #root {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Custom Archival Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(237, 228, 206, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(86, 125, 119, 0.35);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(86, 125, 119, 0.65);
+}
+
+/* Astrolabe / Compass Rotating Animation */
+@keyframes compass-drift {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-astrolabe {
+  animation: compass-drift 60s linear infinite;
+}
+
+/* Pulse animation for map radar pin (Terracotta & Ochre) */
+@keyframes atlas-pulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+
+.radar-ping-terracotta {
+  animation: atlas-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.radar-ping-ochre {
+  animation: atlas-pulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  animation-delay: 0.6s;
+}
+
+/* Leaflet Container */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #182322 !important;
+  font-family: inherit !important;
+}
+
+/* Illustrated Map Tiles (Atlas Color-Shift) */
+.atlas-tiles .leaflet-tile {
+  filter: contrast(1.1) saturate(1.2) hue-rotate(20deg) brightness(0.96);
+}
+
+/* Dark Canvas Tiles */
+.dark-canvas .leaflet-tile {
+  filter: contrast(1.05) brightness(0.9) hue-rotate(180deg) saturate(0.5);
+}

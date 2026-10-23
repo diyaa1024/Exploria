@@ -1,0 +1,26 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: exploria-backend
+    ports:
+      - "8000:8000"
+    # All API keys and model settings (Groq, OpenRouter, Gemini, Geoapify, Google, Foursquare)
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend/data/cache:/app/data/cache
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: exploria-frontend
+    ports:
+      - "5173:80"
+    # Nginx serves the built app and proxies /api to the backend service
+    depends_on:
+      - backend
+    restart: unless-stopped

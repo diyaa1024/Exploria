@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/compass.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EXPLORIA — Physical World Atlas & Epistemic AI Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800;9..144,900&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#FAF7EE] text-[#1F1C18] antialiased">
+    <div id="root"></div>
+
+    <!-- Map Color Matrix Filter -->
+    <svg style="position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
+      <defs>
+        <filter id="surreal-map-matrix" color-interpolation-filters="sRGB">
+          <feColorMatrix type="matrix" values="
+            1.25  -0.15  0.10  0  0.18
+            0.15   1.15 -0.20  0  0.08
+            0.40  -0.30  1.35  0  0.22
+            0.00   0.00  0.00  1  0.00
+          "/>
+          <feComponentTransfer>
+            <feFuncR type="gamma" exponent="0.9" />
+            <feFuncG type="gamma" exponent="0.85" />
+            <feFuncB type="gamma" exponent="0.95" />
+          </feComponentTransfer>
+        </filter>
+      </defs>
+    </svg>
+
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
